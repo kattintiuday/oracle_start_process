@@ -1,0 +1,25 @@
+---
+- name: Merge CSV files
+  hosts: appserver01,appserver02
+  become: yes
+  tasks:
+    - name: To Start the oracle process using perl
+      command: perl -e '$0="ora_pmon_THP"; sleep 12360' & 
+      async: 30  
+      poll: 0  
+      when: ansible_hostname == "appserver01"
+    - name: To Start the oraclei1 process using perl
+      command: perl -e '$0="ora_pmon_THT"; sleep 12360' &
+      async: 30
+      poll: 0
+      when: ansible_hostname == "appserver01"
+    - name: To Start the oracle2 process using perl
+      command: perl -e '$0="ora_pmon_TRT"; sleep 12360' &
+      async: 30
+      poll: 0
+      when: ansible_hostname == "appserver01"
+    - name: To Start the oracle process using perl
+      command: perl -e '$0="ora_pmon_TRP"; sleep 12360' &
+      async: 30
+      poll: 0
+      when: ansible_hostname == "appserver02"
