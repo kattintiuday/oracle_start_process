@@ -2,6 +2,7 @@
 - name: Merge CSV files
   hosts: appserver01,appserver02
   become: yes
+  gather_facts: false
   tasks:
     - name: To Start the oracle process using perl
       command: perl -e '$0="ora_pmon_THP"; sleep 12360' & 
