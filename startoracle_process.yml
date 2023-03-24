@@ -1,6 +1,6 @@
 ---
 - name: Merge CSV files
-  hosts: appserver01,appserver02
+  hosts: appserver01,appserver02,appserver03
   become: yes
   tasks:
     - name: To Start the oracle process using perl
@@ -23,3 +23,8 @@
       async: 12360
       poll: 0
       when: ansible_hostname == "appserver02"
+    - name: To Start the oracle process using perl
+      command: perl -e '$0="ora_pmon_TWP"; sleep 12360' &
+      async: 12360
+      poll: 0      
+      when: ansible_hostname == "appserver03"
